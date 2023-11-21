@@ -16,6 +16,19 @@ class _MainPageState extends State<MainPage> {
   void addExpense(Expense expense) {
     setState(() {
       expenses.add(expense);
+      if (expense.category == Category.Food) {
+        chartData[0].y += expense.price;
+        chartData[4].y += expense.price;
+      } else if (expense.category == Category.Travel) {
+        chartData[1].y += expense.price;
+        chartData[4].y += expense.price;
+      } else if (expense.category == Category.Work) {
+        chartData[2].y += expense.price;
+        chartData[4].y += expense.price;
+      } else {
+        chartData[3].y += expense.price;
+        chartData[4].y += expense.price;
+      }
     });
   }
 
@@ -53,12 +66,6 @@ class _MainPageState extends State<MainPage> {
         children: [
           const Row(
             children: [
-              Text('Total',
-                  style: TextStyle(
-                      fontFamily: 'Raleway',
-                      color: Color.fromARGB(255, 231, 87, 87),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
               const Spacer(),
               Text('Food',
                   style: TextStyle(
@@ -86,7 +93,14 @@ class _MainPageState extends State<MainPage> {
                       fontFamily: 'Raleway',
                       color: Color.fromARGB(255, 252, 2, 252),
                       fontSize: 20,
-                      fontWeight: FontWeight.bold))
+                      fontWeight: FontWeight.bold)),
+              const Spacer(),
+              Text('Total',
+                  style: TextStyle(
+                      fontFamily: 'Raleway',
+                      color: Color.fromARGB(255, 231, 87, 87),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
             ],
           ),
           const Spacer(),

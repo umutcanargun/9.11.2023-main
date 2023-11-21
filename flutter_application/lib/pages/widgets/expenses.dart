@@ -70,17 +70,17 @@ double totalExpenditure = totalEducationExpenditure() +
 
 class ChartData {
   ChartData(this.x, this.y, this.z);
-  final String x;
-  final double y;
-  final Color z;
+  String x;
+  double y;
+  Color z;
 }
 
 final List<ChartData> chartData = [
-  ChartData('Total', totalExpenditure, Color.fromARGB(255, 231, 87, 87)),
   ChartData('Food', totalFoodExpenditure(), Color.fromARGB(255, 1, 1, 159)),
   ChartData(
       'Travel', totalTravelExpenditure(), Color.fromARGB(255, 50, 142, 245)),
   ChartData('Work', totalWorkExpenditure(), Color.fromARGB(255, 249, 64, 2)),
   ChartData('Education', totalEducationExpenditure(),
-      Color.fromARGB(255, 252, 2, 252))
+      Color.fromARGB(255, 252, 2, 252)),
+  ChartData('Total', totalExpenditure, Color.fromARGB(255, 231, 87, 87)),
 ];

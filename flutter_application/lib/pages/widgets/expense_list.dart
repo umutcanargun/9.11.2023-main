@@ -15,6 +15,8 @@ class ExpenseList extends StatefulWidget {
 class _ExpenseListState extends State<ExpenseList> {
   @override
   Widget build(BuildContext context) {
+    List<Expense> removedItem;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +29,15 @@ class _ExpenseListState extends State<ExpenseList> {
               shrinkWrap: true,
               itemCount: expenses.length,
               itemBuilder: (context, index) {
-                return ExpenseItem(expenses[index]);
+                return Dismissible(
+                  key: ValueKey(widget.expenses[index]),
+                  child: ExpenseItem(expenses[index]),
+                  onDismissed: (direction) {
+                    if (direction == DismissDirection.startToEnd) {
+                      widget.onRemove(widget.expenses[index]);
+                    }
+                  },
+                );
               },
             ),
           ),
