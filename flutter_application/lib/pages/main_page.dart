@@ -35,6 +35,19 @@ class _MainPageState extends State<MainPage> {
   void removeExpense(Expense expense) {
     setState(() {
       expenses.remove(expense);
+      if (expense.category == Category.Food) {
+        chartData[0].y -= expense.price;
+        chartData[4].y -= expense.price;
+      } else if (expense.category == Category.Travel) {
+        chartData[1].y -= expense.price;
+        chartData[4].y -= expense.price;
+      } else if (expense.category == Category.Work) {
+        chartData[2].y -= expense.price;
+        chartData[4].y -= expense.price;
+      } else {
+        chartData[3].y -= expense.price;
+        chartData[4].y -= expense.price;
+      }
     });
   }
 
@@ -101,6 +114,7 @@ class _MainPageState extends State<MainPage> {
                       color: Color.fromARGB(255, 231, 87, 87),
                       fontSize: 20,
                       fontWeight: FontWeight.bold)),
+              const Spacer(),
             ],
           ),
           const Spacer(),
@@ -119,7 +133,7 @@ class _MainPageState extends State<MainPage> {
                     isVisible: true))
           ]),
           const Spacer(),
-          ExpenseList(expenses, removeExpense),
+          ExpenseList(expenses, removeExpense, addExpense),
           const Spacer(),
         ],
       )),
